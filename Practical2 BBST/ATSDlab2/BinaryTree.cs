@@ -154,6 +154,7 @@ namespace ATSDlab2
                 ToList(node.Right, list);
             }
         }
+        //12. Make Empty BST
         void makeEmpty() 
         {
             Root = null;
