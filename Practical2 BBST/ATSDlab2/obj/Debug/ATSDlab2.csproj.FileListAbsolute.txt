@@ -1,0 +1,7 @@
+C:\Users\Demid\source\repos\ATSDlab2\ATSDlab2\bin\Debug\ATSDlab2.exe.config
+C:\Users\Demid\source\repos\ATSDlab2\ATSDlab2\bin\Debug\ATSDlab2.exe
+C:\Users\Demid\source\repos\ATSDlab2\ATSDlab2\bin\Debug\ATSDlab2.pdb
+C:\Users\Demid\source\repos\ATSDlab2\ATSDlab2\obj\Debug\ATSDlab2.csprojAssemblyReference.cache
+C:\Users\Demid\source\repos\ATSDlab2\ATSDlab2\obj\Debug\ATSDlab2.csproj.CoreCompileInputs.cache
+C:\Users\Demid\source\repos\ATSDlab2\ATSDlab2\obj\Debug\ATSDlab2.exe
+C:\Users\Demid\source\repos\ATSDlab2\ATSDlab2\obj\Debug\ATSDlab2.pdb
