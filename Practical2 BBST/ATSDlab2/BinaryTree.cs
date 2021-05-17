@@ -49,8 +49,142 @@ namespace ATSDlab2
         {
             Root?.PrintPostOrder();
         }
+        //1.	Given a recursive function (= a definition of a recursive algorithm).
+        public int F(int n)
+        {
+            if (n == 0)
+            {
+                return 3;
+            }
+            else if(n>0)
+            {
+                return 4 * F(n - 1) + 2 * F(n / 2) + 7;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        //2. Write a recursive algorithm int Prod( int a, int b) that calculates and returns a×b;
+        static int product(int x, int y)
+        {
+            // if x is less than
+            // y swap the numbers
+            if (x < y)
+                return product(y, x);
 
-        //1. It count the number of left son nodes in a BBST.
+            // iteratively calculate
+            // y times sum of x
+            else if (y != 0)
+                return (x + product(x, y - 1));
+
+            // if any of the two numbers is
+            // zero return zero
+            else
+                return 0;
+        }
+        //3.Write a recursive algorithm  int Sum() that calculates and returns 
+        //the sum of integer items of a linked list
+        int Sum(LinkedListNode<int> head)
+        {
+            if (head != null)
+                return head.Value + Sum(head.Next);
+            else
+                return 0;
+        }
+        //4.Write a recursive algorithm  void printList() 
+        //that prints integer items of a linked list.
+        static void printList(LinkedListNode<T> head)
+        {
+            if (head == null)
+                return;
+
+            // If head is not null, print current node
+            // and recur for remaining list
+            Console.Write(head.Value + " ");
+
+            printList(head.Next);
+        }
+        //5.	Write a recursive algorithm  void printListReverse() 
+        //that prints integer items of a linked list in reverse order.
+        void printReverse(LinkedListNode<T> head)
+        {
+            if (head == null) return;
+
+            // print list of head node
+            printReverse(head.Next);
+
+            // After everything else is printed
+            Console.Write(head.Value + " ");
+        }
+
+        //6,7 Realised in BinaryTreeNode.cs
+
+        //8. It finds the sum of keys in right son nodes in a BBST.
+        public int SumKeys(BinaryTreeNode<int> root)
+        {
+            if (root == null)
+            {
+                return 0;
+            }
+            return (root.Data + SumKeys(root.Right));
+        }
+        //10. It returns true if two BBSTs are equal( if tree shapes and corresponding keys are the same). 
+        //Otherwise it returns false.
+        public bool sameData(BinaryTree<T> BinaryTree)
+        {
+            return this.ToList().SequenceEqual(BinaryTree.ToList());
+        }
+        //11.	Write an algorithm  function void BST_List(linkedList *L)  
+        //that copies data from a binary search tree T into a linked list L which is sorted in ascending order.
+        private void ToList(BinaryTreeNode<T> node, List<T> list)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            list.Add(node.Data);
+            if (node.Left != null)
+            {
+                ToList(node.Left, list);
+            }
+
+            if (node.Right != null)
+            {
+                ToList(node.Right, list);
+            }
+        }
+        void makeEmpty() 
+        {
+            Root = null;
+        }
+        //13.	Write an algorithm int size() for the class BST that returns the number 
+        //of data items (= nodes) in a BST.
+        private int Size(BinaryTreeNode<T> node)
+        {
+            if (node == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return (Size(node.Left) + 1 + Size(node.Right));
+            }
+        }
+
+        //14. It returns true if the calling object is a balanced binary search tree, otherwise false.
+        public bool IsBalanced()
+        {
+            return BalanceFactor(Root) < 2 && BalanceFactor(Root) > -2;
+        }
+        private int BalanceFactor(BinaryTreeNode<T> current)
+        {
+            int l = GetHeight(current.Left);
+            int r = GetHeight(current.Right);
+            int balanceFactor = l - r;
+            return balanceFactor;
+        }
+        //It count the number of left son nodes in a BBST.
         public int CounNodeLeft()
         {
             return CountNodeLeft(Root);
@@ -72,7 +206,7 @@ namespace ATSDlab2
             }
         }
 
-        //2. add node in BST, using only recursion.
+        //add node in BST, using only recursion.
         private BinaryTreeNode<T> RecursiveInsert(BinaryTreeNode<T> current, BinaryTreeNode<T> n)
         {
             if (current == null)
@@ -93,7 +227,7 @@ namespace ATSDlab2
             return current;
         }
 
-        //3.searches node in BST, using only recursion.
+        //searches node in BST, using only recursion.
         public void Search(T data)
         {
             if (Search(data, Root).Data.Equals(data))
@@ -124,7 +258,7 @@ namespace ATSDlab2
             return Search(data, current.Right);
         }
 
-        //4.deletes node in BST, using only recursion.
+        //deletes node in BST, using only recursion.
         public void Delete(T data)
         {
             Root = Delete(Root, data);
@@ -193,34 +327,7 @@ namespace ATSDlab2
             }
             return current;
         }
-        //6. It finds the sum of keys in right son nodes in a BBST.
-        public int SumKeys(BinaryTreeNode<int> root)
-        {
-            if (root == null)
-            {
-                return 0;
-            }
-            return (root.Data + SumKeys(root.Right));
-        }
 
-        //8. It returns true if two BBSTs are equal( if tree shapes and corresponding keys are the same). Otherwise it returns false.
-        public bool sameData(BinaryTree<T> BinaryTree)
-        {
-            return this.ToList().SequenceEqual(BinaryTree.ToList());
-        }
-
-        //10. It returns true if the calling object is a balanced binary search tree, otherwise false.
-        public bool IsBalanced()
-        {
-            return BalanceFactor(Root) < 2 && BalanceFactor(Root) > -2;
-        }
-        private int BalanceFactor(BinaryTreeNode<T> current)
-        {
-            int l = GetHeight(current.Left);
-            int r = GetHeight(current.Right);
-            int balanceFactor = l - r;
-            return balanceFactor;
-        }
         //It deletes all even keys from a BBST. (Result is also a BBST)
         public BinaryTree<T> DeleteEven()
         {
@@ -233,6 +340,7 @@ namespace ATSDlab2
 
             return BinaryTree;
         }
+
         //It returns the tree key which is the nearest to the Valuemid = (keymin + keymax) / 2.
         public T FindMiddle()
         {
@@ -474,35 +582,7 @@ namespace ATSDlab2
         {
             return Size(Root);
         }
-        private int Size(BinaryTreeNode<T> node)
-        {
-            if (node == null)
-            {
-                return 0;
-            }
-            else
-            {
-                return (Size(node.Left) + 1 + Size(node.Right));
-            }
-        }
-
-        private void ToList(BinaryTreeNode<T> node, List<T> list)
-        {
-            if (node == null)
-            {
-                return;
-            }
-            list.Add(node.Data);
-            if (node.Left != null)
-            {
-                ToList(node.Left, list);
-            }
-
-            if (node.Right != null)
-            {
-                ToList(node.Right, list);
-            }
-        }
+                
 
         public List<T> ToList()
         {
